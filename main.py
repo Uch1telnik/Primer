@@ -11,10 +11,22 @@ def is_prime(n):
     return False
 
 def fermat_test(n, a):
-    if pow(a, n-1, n) == 1:
+    if fast_pow(a, n-1, n) == 1:
         return True
     else:
         return False
+
+def fast_pow(a, n, m):
+    if m == 1:
+        return 0
+    res = 1
+    base = a % m
+    while n > 0:
+        if n & 1:
+            res = (res * base) % m
+        base = (base * base) % m
+        n >>= 1
+    return res
 
 assert is_prime(2)
 assert is_prime(3)
